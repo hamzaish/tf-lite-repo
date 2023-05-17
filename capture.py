@@ -26,6 +26,6 @@ while(1):
     cv.imshow('res',res)
     k = cv.waitKey(5) & 0xFF
     if k == 27:
-    break
+        break
 
     cv.destroyAllWindows()
