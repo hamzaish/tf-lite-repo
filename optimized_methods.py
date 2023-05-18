@@ -3,7 +3,6 @@ from tflite_runtime.interpreter import Interpreter
 import numpy as np
 import argparse
 from PIL import Image
-import cv2
 
 def getVideo(cap):
     _, frame = cap.read()
