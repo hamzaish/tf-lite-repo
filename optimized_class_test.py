@@ -16,3 +16,4 @@ classifier = ClassifyObject(interpreter, cap)
 
 while True:
     print(classifier.classify)
+    time.sleep(5)
