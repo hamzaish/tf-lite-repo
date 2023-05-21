@@ -17,8 +17,6 @@ class ClassifyObject():
         input_index = self.interpreter.get_input_details()[0]["index"]
         output_index = self.interpreter.get_output_details()[0]["index"]
         img = self.getVideo()/255
-        img = cv2.imread('snapple.jpg')
-        img = img/255
         img = img.astype(np.float32)
         img = cv2.resize(img, (224, 224))
         test_image = np.expand_dims(img, axis=0)
