@@ -1,6 +1,5 @@
 import time
 import cv2
-import pandas
 from datetime import datetime
 import imutils
 
@@ -10,7 +9,7 @@ class MotionSensor:
     cap = None
     optimized = None
     initial = None
-    detect = False
+    detect = True
     
     def __init__(self, cap, optimized):
         self.cap = cap
@@ -20,9 +19,10 @@ class MotionSensor:
         self.changeDetect()
         self.optimized.classify()
         self.changeDetect()
+        self.start()
     
     def changeDetect(self):
-        detect = not detect
+        self.detect = not self.detect
 
     def start(self):
         while self.detect:
@@ -37,8 +37,10 @@ class MotionSensor:
             thresh_frame = cv2.dilate(thresh_frame, None, iterations = 2)
             cont = cv2.findContours(thresh_frame.copy(), cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
             cnts = imutils.grab_contours(cont)
+            self.initial = gray_frame
             for cur in cnts:  
                 if cv2.contourArea(cur) < 100000:
-                    continue  
-                self.notify()
-            initial = gray_frame
+                    continue
+                else:
+                    return self.notify()
+            

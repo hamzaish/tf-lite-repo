@@ -13,10 +13,13 @@ class ClassifyObject():
         _, frame = self.cap.read()
         return frame
 
-    def classify(self):
+    def classify(self, image: None):
         input_index = self.interpreter.get_input_details()[0]["index"]
         output_index = self.interpreter.get_output_details()[0]["index"]
-        img = self.getVideo()/255
+        if image == None:
+            img = self.getVideo()/255
+        else:
+            img = image/255
         img = img.astype(np.float32)
         img = cv2.resize(img, (224, 224))
         test_image = np.expand_dims(img, axis=0)
