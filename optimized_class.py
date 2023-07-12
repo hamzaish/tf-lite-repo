@@ -4,10 +4,12 @@ import numpy as np
 class ClassifyObject():
     interpreter = None
     cap = None
+    motor = None
 
-    def __init__(self, interpreter, cap) -> None:
+    def __init__(self, interpreter, cap, motor) -> None:
         self.interpreter = interpreter
         self.cap = cap
+        self.motor = motor
 
     def getVideo(self):
         _, frame = self.cap.read()
@@ -29,7 +31,7 @@ class ClassifyObject():
         prob = self.interpreter.get_tensor(output_index)
         print(prob[0])
         if prob[0][0] > 0.85:
-            return 'recycle'
+            self.motor.recycle()
         else:
-            return 'trash'
+            self.motor.trash()
     

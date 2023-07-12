@@ -10,15 +10,19 @@ class MotionSensor:
     optimized = None
     initial = None
     detect = True
+    motor = None
     
-    def __init__(self, cap, optimized):
+    def __init__(self, cap, optimized, motor):
         self.cap = cap
         self.optimized = optimized
+        self.motor = motor
     
     def notify(self):
         self.changeDetect()
+        self.motor.close_servo()
         self.optimized.classify()
         self.changeDetect()
+        self.motor.open_servo()
         self.start()
     
     def changeDetect(self):
