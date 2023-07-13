@@ -15,7 +15,7 @@ class ClassifyObject():
         _, frame = self.cap.read()
         return frame
 
-    def classify(self, image: None):
+    def classify(self, image= None):
         input_index = self.interpreter.get_input_details()[0]["index"]
         output_index = self.interpreter.get_output_details()[0]["index"]
         if image == None:
