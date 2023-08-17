@@ -36,11 +36,20 @@ class PirSensor:
         self.detect = True
         self.start()
 
+    def garbage_full(self):
+        self.motor.close_servo()
+        while self.ultrasonic1.value == True or self.ultrasonic2.value == True:
+            time.sleep(5)
+        self.motor.open_servo()
+        self.detect = True
+        self.start()
+
     def start(self):
-        while self.detect and (self.ultrasonic1.value == False and self.ultrasonic2.value == False):
+        while self.detect:
+            if self.ultrasonic1.value == True or self.ultrasonic2.value == True:
+                self.motor.close_servo()
+                print("Trash detected")
+                return self.garbage_full()
             if self.pir.value == True or self.motion_usonic.value == True:
                 self.detect = False
                 return self.notify()
-        if self.ultrasonic1.value == True or self.ultrasonic2.value == True:
-            self.motor.close_servo()
-            self.lights.value = False
