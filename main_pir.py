@@ -1,3 +1,4 @@
+"""Hello world!"""
 from optimized_class import ClassifyObject
 import cv2 as cv
 from tflite_runtime.interpreter import Interpreter
